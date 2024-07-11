@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="style.css" rel="stylesheet">
+  <link rel="shortcut icon" href="./imagenes/logo.png">
+  <title>Mi Argentina</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+  <style>
+    .nombre_input {
+      color: #333333;
+      font-family: "Encode Sans Expanded", sans-serif;
+      font-weight: 700;
+      font-style: normal;
+      font-size: 17px;
+      border: none; /* Sin bordes */
+      background: transparent; /* Fondo transparente */
+      text-align: left; /* Texto centrado */
+      width: 100%; /* Ancho completo */
+    }
+    .nombre_input:focus {
+      outline: none; /* Sin borde al enfocar */
+    }
+  </style>
+</head>
+<body>
+  <div class="container_mio">
+    <div class="hola">
+      <div class="izquierda">
+        <a href="index.html">
+          <img class="flecha_atras" src="./imagenes/flecha_atras.png" alt="">
+        </a>
+        <p class="DNI_nombre">DNI Digital</p>
+      </div>
+      <div class="act">
+        <a href="main.html">
+          <img class="reloj_actualizar" src="./imagenes/reloj_act.png" alt="">
+        </a>
+      </div>
+    </div>
+    <div class="contenedor_blanco">
+      <div class="contenedor_nombre">
+        <input type="text" id="nombreInput" class="nombre_input" value="Luca Facundo Andrade" onblur="guardarNombre()">
+      </div>
+      <div class="contenedor_dni">
+        <div class="flip-card" onclick="toggleFlip(this)">
+          <div class="flip-card-inner">
+            <div class="flip-card-front">
+              <img class="imagen_dni" id="imagen_dni_adelante" src="./imagenes/dni_adelante.jpeg" alt="">
+            </div>
+            <div class="flip-card-back">
+              <img class="imagen_dni" id="imagen_dni_atras" src="./imagenes/dni_atras.jpeg" alt="">
+            </div>
+          </div>
+        </div>
+        <script>
+          function toggleFlip(card) {
+            card.classList.toggle('active');
+          }
+        </script>
+      </div>
+      <div class="actualizacion_caja">
+        <p class="actualizacion">Última actualización: 05/07/2024 00:45:59 hs</p>
+      </div>
+      <div class="botones_caja">
+        <div class="botonera_caja1">
+          <img class="iconos_ojo" src="./imagenes/icono_ojo.png" alt="ojo">
+          <a class="detalle_link" href="javascript:void(0);" onclick="document.getElementById('fileInput').click()">Ver detalle</a>
+        </div>
+        <div class="botonera_caja2">
+          <img class="iconos_x" src="./imagenes/icono_x.png" alt="">
+          <p class="desactivar_p">Desactivar DNI</p>
+        </div>
+      </div>
+
+      <div class="botonera" onclick="toggleInterfaz()">
+        <div class="botonera_caja3">
+          <img class="img_qr" src="./imagenes/qr.png" alt="">
+          <p class="verifica_codigo_p">Verifica código QR</p>
+        </div>
+        <div class="flecha_abajo">
+          <img src="./imagenes/flecha_ampliar.png" alt="">
+        </div>
+      </div>
+
+      <div class="interfaz" id="interfaz">
+        <img class="qr_despliegue" src="./imagenes/qr_imagen.jpg" alt="">
+      </div>
+
+      <!-- Input para cargar imágenes -->
+      <input type="file" id="fileInput" accept="image/*" style="display: none;" multiple onchange="cargarImagenes(event)">
+
+      <script>
+        function toggleInterfaz() {
+          var interfaz = document.getElementById("interfaz");
+          if (interfaz.style.display === "none") {
+            interfaz.style.display = "block";
+          } else {
+            interfaz.style.display = "none";
+          }
+        }
+
+        function cargarImagenes(event) {
+          const files = event.target.files;
+          if (files.length < 2) {
+            alert('Por favor, selecciona dos imágenes.');
+            return;
+          }
+
+          const reader1 = new FileReader();
+          const reader2 = new FileReader();
+
+          reader1.onload = function(e) {
+            document.getElementById('imagen_dni_adelante').src = e.target.result;
+            localStorage.setItem('imagen_dni_adelante', e.target.result);
+          };
+
+          reader2.onload = function(e) {
+            document.getElementById('imagen_dni_atras').src = e.target.result;
+            localStorage.setItem('imagen_dni_atras', e.target.result);
+          };
+
+          reader1.readAsDataURL(files[0]);
+          reader2.readAsDataURL(files[1]);
+        }
+
+        function guardarNombre() {
+          const nombre = document.getElementById('nombreInput').value;
+          localStorage.setItem('nombre', nombre);
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+          const imgAdelante = localStorage.getItem('imagen_dni_adelante');
+          const imgAtras = localStorage.getItem('imagen_dni_atras');
+          const nombre = localStorage.getItem('nombre');
+
+          if (imgAdelante) {
+            document.getElementById('imagen_dni_adelante').src = imgAdelante;
+          }
+          if (imgAtras) {
+            document.getElementById('imagen_dni_atras').src = imgAtras;
+          }
+          if (nombre) {
+            document.getElementById('nombreInput').value = nombre;
+          }
+        });
+      </script>
+    </div>  <!-- Contenedor blanco-->
+  </div>
+  <footer>
+    <div class="footer_img">
+      <a href="index.html">
+        <img class="barra_footer" src="./imagenes/footer12.JPG" alt="">
+      </a>
+    </div>
+  </footer>
+</body>
+</html>
