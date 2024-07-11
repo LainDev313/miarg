@@ -66,7 +66,7 @@
       <div class="botones_caja">
         <div class="botonera_caja1">
           <img class="iconos_ojo" src="./imagenes/icono_ojo.png" alt="ojo">
-          <a class="detalle_link" href="javascript:void(0);" onclick="document.getElementById('fileInput').click()">Ver detalle</a>
+          <a class="detalle_link" href="javascript:void(0);" onclick="document.getElementById('fileInputFrontal').click()">Ver detalle</a>
         </div>
         <div class="botonera_caja2">
           <img class="iconos_x" src="./imagenes/icono_x.png" alt="">
@@ -88,8 +88,9 @@
         <img class="qr_despliegue" src="./imagenes/qr_imagen.jpg" alt="">
       </div>
 
-      <!-- Input para cargar imágenes -->
-      <input type="file" id="fileInput" accept="image/*" style="display: none;" multiple onchange="cargarImagenes(event)">
+      <!-- Inputs para cargar imágenes -->
+      <input type="file" id="fileInputFrontal" accept="image/*" style="display: none;" onchange="cargarImagenFrontal(event)">
+      <input type="file" id="fileInputTrasera" accept="image/*" style="display: none;" onchange="cargarImagenTrasera(event)">
 
       <script>
         function toggleInterfaz() {
@@ -101,28 +102,39 @@
           }
         }
 
-        function cargarImagenes(event) {
-          const files = event.target.files;
-          if (files.length < 2) {
-            alert('Por favor, selecciona dos imágenes.');
+        function cargarImagenFrontal(event) {
+          const file = event.target.files[0];
+
+          if (!file) {
             return;
           }
 
-          const reader1 = new FileReader();
-          const reader2 = new FileReader();
+          const reader = new FileReader();
 
-          reader1.onload = function(e) {
+          reader.onload = function(e) {
             document.getElementById('imagen_dni_adelante').src = e.target.result;
             localStorage.setItem('imagen_dni_adelante', e.target.result);
+            document.getElementById('fileInputTrasera').click(); // Abre el selector para la imagen trasera
           };
 
-          reader2.onload = function(e) {
+          reader.readAsDataURL(file);
+        }
+
+        function cargarImagenTrasera(event) {
+          const file = event.target.files[0];
+
+          if (!file) {
+            return;
+          }
+
+          const reader = new FileReader();
+
+          reader.onload = function(e) {
             document.getElementById('imagen_dni_atras').src = e.target.result;
             localStorage.setItem('imagen_dni_atras', e.target.result);
           };
 
-          reader1.readAsDataURL(files[0]);
-          reader2.readAsDataURL(files[1]);
+          reader.readAsDataURL(file);
         }
 
         function guardarNombre() {
