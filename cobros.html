@@ -23,12 +23,8 @@
 
 <body>
     <div id="header">
-        <div id="back-arrow-btn" onclick="window.location.href = 'index.html'">
-            <svg id="back-arrow" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                <path fill-rule="evenodd"
-                    d="M10.78 19.03a.75.75 0 01-1.06 0l-6.25-6.25a.75.75 0 010-1.06l6.25-6.25a.75.75 0 111.06 1.06L5.81 11.5h14.44a.75.75 0 010 1.5H5.81l4.97 4.97a.75.75 0 010 1.06z">
-                </path>
-            </svg>
+        <div id="back-arrow-btn" onclick="history.back()">
+            <img src="res/md_nav_back.png" style="height: 25px;" alt="">
         </div>
 
         <h1 id="title">Dni Digital</h1>
@@ -54,20 +50,33 @@
                         <img class="dni-item" src="" alt="dni image" id="dni-image">
                         <img class="dni-item" src="" alt="dni image" id="dni-firma">
                         <canvas class="dni-item" id="dni-qr"></canvas>
+                        <a class="dni-item" id="dni-number-title">Documento / Document</a>
                         <a class="dni-item" id="dni-number"></a>
+                        <a class="dni-item dni-subtitle" id="dni-surname-title">Apellido / Surname</a>
                         <a class="dni-item dni-param" id="dni-surname"></a>
+                        <a class="dni-item dni-subtitle" id="dni-name-title">Nombre / Name</a>
                         <a class="dni-item dni-param" id="dni-name"></a>
+                        <a class="dni-item dni-subtitle" id="dni-sex-title">Sexo / Sex</a>
                         <a class="dni-item dni-param" id="dni-sex"></a>
+                        <a class="dni-item dni-subtitle" id="dni-nationality-title">Nacionalidad / Nationality</a>
+                        <a class="dni-item dni-param" id="dni-nationality">ARGENTINA</a>
+                        <a class="dni-item dni-subtitle" id="dni-ejemplar-title">Ejemplar</a>
                         <a class="dni-item dni-param" id="dni-ejemplar"></a>
+                        <a class="dni-item dni-subtitle" id="dni-birth-title">Fecha de nacimiento / Date of birth</a>
                         <a class="dni-item dni-param" id="dni-birth"></a>
+                        <a class="dni-item dni-param" id="dni-signature-title">FIRMA IDENTIFICADO / SIGNATURE</a>
+                        <a class="dni-item dni-subtitle" id="dni-issue-title">Fecha de emisión / Date of issue</a>
                         <a class="dni-item dni-param" id="dni-issue"></a>
+                        <a class="dni-item dni-subtitle" id="dni-expiration-title">Fecha de vencimiento / Date of expiry</a>
                         <a class="dni-item dni-param" id="dni-expiration"></a>
+                        <a class="dni-item dni-subtitle" id="dni-tramite-num-title">Tramite No / Of. ident.</a>
                         <a class="dni-item dni-param" id="dni-tramite-num"></a>
                     </div>
                     <div id="dni-template-back" class="card__face card__face--back">
-                        <a class="dni-item" id="dni-address">
-                            <font style="font-size: calc(7px * var(--dni-size-multiplier)); font-weight: 500; letter-spacing: 0;">DOMICILIO</font>
+                        <a class="dni-item" id="dni-address-inc">
+                            <font style="font-size: calc(9px * var(--dni-size-multiplier));">DOMICILIO</font>
                         </a>
+                        <a class="dni-item" id="dni-place">LUGAR DE NACIMIENTO -</a>
                         <a class="dni-item" id="dni-mrz">
                             
                         </a>
@@ -84,13 +93,13 @@
             </div>
         </div>
         <div id="details-container">
-            <div class="details-container">
-                <img src="res/cellphone-icon.png" width="32" height="32">
+            <div class="details-container" onclick="window.location.href = 'dni_details.html';">
+                <img src="res/ic_detalle_dni.png" width="32">
                 <a class="details-label" onclick="">Ver detalle de mi DNI Digital</a>
             </div>
 
-            <div class="details-container">
-                <img src="res/calling-icon.png" width="32" height="32">
+            <div class="details-container" style="margin-top: 5px;" onclick="window.open('https://www.argentina.gob.ar/interior/renaper/canales-renaper','new_window');">
+                <img src="res/ic_telefonos_grey.png" width="28">
                 <a class="details-label">Mesa de ayuda</a>
             </div>
         </div>
